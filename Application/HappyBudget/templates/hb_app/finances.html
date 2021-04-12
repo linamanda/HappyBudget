@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Happy Budget - Your Finances</title>
+    <link rel="stylesheet" href="{%static "css/style.css"%}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="financesNav">
+      <a href="home">Happy Budget</a>
+      <p>
+        <img src="{% static "images/navIcon.png"%}" alt="Navigation">
+      </p>
+    </div>
+
+    <div class="financesHero">
+      <h1>YOUR FINANCES</h1>
+    </div>
+
+    <div class="financesMainContent">
+      <div class="financesBalance">
+        <h2>Balance</h2>
+      </div>
+
+      <div class="financesVisualBreakdown">
+        <h2>Finances Breakdown</h2>
+      </div>
+
+      <div class="financesTransactions">
+        <h2>Recent Transactions</h2>
+      </div>
+    </div>
+  </body>
+</html>

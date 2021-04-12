@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Happy Budget - Home</title>
+    <link rel="stylesheet" href="{%static "css/style.css"%}">
+  </head>
+  <body>
+    <div class="homeMainContent">
+      <div class="homeHeadTitle">
+        <p>Welcome back,</p>
+        <p>[NAME]</p>
+      </div>
+
+      <div class="homeNav">
+        <a href="accounts">
+          <img src="{% static "images/accountsIcon.png"%}" alt="Accounts">
+        </a>
+
+        <a href="finances">
+          <img src="{% static "images/financesIcon.png"%}" alt="Finances">
+        </a>
+
+        <a href="personalGoals">
+          <img src="{% static "images/goalsIcon.png"%}" alt="Goals">
+        </a>
+
+        <a href="#">LOGOUT</a>
+      </div>
+    </div>
+  </body>
+</html>

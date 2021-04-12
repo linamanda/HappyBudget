@@ -1,0 +1,11 @@
+'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'happybudgetdb.c2wykpc0pxkd.us-east-2.rds.amazonaws.com',
+        'USER': 'happybudget',
+
+        'PASSWORD': 'happybudget',
+
+        'HOST': 'happybudgetdb.c2wykpc0pxkd.us-east-2.rds.amazonaws.com',
+
+        'PORT': '5432',
+    }

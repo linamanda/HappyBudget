@@ -1,0 +1,38 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+.headTitle {
+  background-color: #ffe77a;
+  height: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headTitle > p {
+  margin: 0;
+  font-size: 3vw;
+}
+
+.footer {
+  background-color: #1e2042;
+  position: absolute;
+  width: 100vw;
+  bottom: 0;
+  padding-bottom: 2vw;
+}
+
+.footer > p {
+  color: white;
+  margin-left: 2vw;
+  margin-bottom: 0;
+}
+
+.resourceLinks {
+  margin-left: 3vw;
+  display: flex;
+  flex-direction: column;
+  line-height: 20px;
+}
