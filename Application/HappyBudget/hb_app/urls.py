@@ -11,4 +11,7 @@ urlpatterns = [
     path('home',views.home, name='home'),
     path('login',views.login, name='login'),
     path('personalGoals',views.personalGoals, name='personalGoals'),
+
+    #random file to test db connections
+    path('dummy',views.dummy, name='dummy'),
 ]

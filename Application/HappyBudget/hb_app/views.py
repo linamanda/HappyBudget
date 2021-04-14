@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from hb_app.models import Goals,Transactions,Users
 
 # Create your views here.
 def index(request):
@@ -29,3 +30,10 @@ def login(request):
 def personalGoals(request):
     random = {'wow':'wow'}
     return render(request,'hb_app/personalGoals.html',context=random)
+
+def dummy(request):
+    webpages_list = Users.objects.order_by('user_id').using('HappyBudget')
+    date_dict = {'access_records':webpages_list}
+
+    random = {'wow':'wow'}
+    return render(request,'hb_app/dummy.html',context=date_dict)
