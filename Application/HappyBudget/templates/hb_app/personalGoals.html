@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 {% load static %}
 <html lang="en" dir="ltr">
   <head>
@@ -21,7 +21,12 @@
     </div>
 
     <div class="personalGoalsMainContent">
-      
+        <p> this is where goals will go</p>
+        {% if personal_goals %}
+            <p>personal goals are found</p>
+        {% else %}
+            <p>personal goals are not found!</p>
+        {% endif %}
     </div>
   </body>
 </html>
