@@ -11,7 +11,8 @@ urlpatterns = [
     path('home',views.home, name='home'),
     path('login',views.login, name='login'),
     path('personalGoals',views.personalGoals, name='personalGoals'),
-
+    path('interactivePet',views.interactivePet, name='interactivePet'),
     #random file to test db connections
     path('dummy',views.dummy, name='dummy'),
+    path('new', views.newPage)
 ]

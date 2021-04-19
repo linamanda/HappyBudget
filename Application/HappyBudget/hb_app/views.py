@@ -28,8 +28,11 @@ def login(request):
     return render(request,'hb_app/login.html',context=random)
 
 def personalGoals(request):
+    goals_list = Goals.objects.order_by('goal_id').using('HappyBudget')
+    date_dict = {'personal_goals':goals_list}
+
     random = {'wow':'wow'}
-    return render(request,'hb_app/personalGoals.html',context=random)
+    return render(request,'hb_app/personalGoals.html',context=date_dict)
 
 def dummy(request):
     webpages_list = Users.objects.order_by('user_id').using('HappyBudget')
@@ -39,3 +42,17 @@ def dummy(request):
     random = {'wow':'wow'}
 
     return render(request,'hb_app/dummy.html',context=date_dict)
+
+def interactivePet(request):
+    random = {'wow':'wow'}
+    return render(request,'hb_app/interactivePet.html',context=random)
+
+def newPage(request):
+    name = request.POST.get("goalname1")
+    target = request.POST.get("goaltarget1")
+    current = request.POST.get("goalcurrent1")
+
+    o_ref = Goals(goal_name=name, goal_target=target, goal_current=current)
+    o_ref.save()
+
+    return render(request, 'personalGoals.html', {"message": "registered"})
