@@ -14,4 +14,5 @@ urlpatterns = [
     path('interactivePet',views.interactivePet, name='interactivePet'),
     #random file to test db connections
     path('dummy',views.dummy, name='dummy'),
+    path('new', views.newPage)
 ]

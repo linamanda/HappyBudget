@@ -21,7 +21,7 @@ STATIC_DIR = os.path.join(BASE_DIR, "static")
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 
+SECRET_KEY = 'ld2y4wj!1y@qznu#0fj!y6=k0&(8--e6p#)rrjuvcn5$(kbml@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,6 +80,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'db.sqlite3',
+    },
+    'HappyBudget':{
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'happybudget',
+        'PASSWORD': 'happybudget',
+        'HOST': 'happybudgetdb.c2wykpc0pxkd.us-east-2.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 

@@ -45,3 +45,12 @@ def interactivePet(request):
     random = {'wow':'wow'}
     return render(request,'hb_app/interactivePet.html',context=random)
 
+def newPage(request):
+    name = request.POST.get("goalname1")
+    target = request.POST.get("goaltarget1")
+    current = request.POST.get("goalcurrent1")
+
+    o_ref = Goals(goal_name=name, goal_target=target, goal_current=current)
+    o_ref.save()
+
+    return render(request, 'personalGoals.html', {"message": "registered"})
