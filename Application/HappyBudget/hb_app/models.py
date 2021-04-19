@@ -9,7 +9,8 @@ from django.db import models
 
 
 class Goals(models.Model):
-    goal_id = models.IntegerField(db_column='Goal_ID', primary_key=True)  # Field name made lowercase.
+    # goal_id = models.IntegerField(db_column='Goal_ID', primary_key=True)  # Field name made lowercase.
+    goal_id = models.AutoField(db_column='Goal_ID', primary_key=True)
     goal_name = models.CharField(db_column='Goal_name', max_length=40, blank=True, null=True)  # Field name made lowercase.
     goal_target = models.TextField(db_column='Goal_target', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     goal_current = models.TextField(db_column='Goal_current', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -21,7 +22,8 @@ class Goals(models.Model):
 
 
 class Transactions(models.Model):
-    transaction_id = models.IntegerField(db_column='transaction_ID', primary_key=True)  # Field name made lowercase.
+    #transaction_id = models.IntegerField(db_column='transaction_ID', primary_key=True)  # Field name made lowercase.
+    transaction_id = models.AutoField(db_column='transaction_ID', primary_key=True)
     transaction_date = models.DateTimeField(blank=True, null=True)
     transaction_amt = models.TextField(blank=True, null=True)  # This field type is a guess.
 
@@ -31,7 +33,8 @@ class Transactions(models.Model):
 
 
 class Users(models.Model):
-    user_id = models.IntegerField(db_column='user_ID', primary_key=True)  # Field name made lowercase.
+    #user_id = models.IntegerField(db_column='user_ID', primary_key=True)  # Field name made lowercase.
+    user_id = models.AutoField(db_column='user_ID', primary_key=True)
     user_name = models.CharField(max_length=40, blank=True, null=True)
     user_password = models.CharField(max_length=40, blank=True, null=True)
     user_email = models.CharField(max_length=40, blank=True, null=True)

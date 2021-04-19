@@ -52,7 +52,11 @@ def newPage(request):
     target = request.POST.get("goaltarget1")
     current = request.POST.get("goalcurrent1")
 
-    o_ref = Goals(goal_name=name, goal_target=target, goal_current=current)
-    o_ref.save()
+    #THIS IS A TEMPORARY SOLUTION
+    goal_id_TEMP = 10
+    #############################
 
-    return render(request, 'personalGoals.html', {"message": "registered"})
+    o_ref = Goals(goal_name=name, goal_target=target, goal_current=current)
+    o_ref.save(using ='HappyBudget')
+
+    return render(request, 'hb_app/personalGoals.html', {"message": "registered"})
