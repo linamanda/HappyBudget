@@ -13,6 +13,7 @@ class Goals(models.Model):
     goal_name = models.CharField(db_column='Goal_name', max_length=40, blank=True, null=True)  # Field name made lowercase.
     goal_target = models.TextField(db_column='Goal_target', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     goal_current = models.TextField(db_column='Goal_current', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    user_id = models.IntegerField(db_column='user_ID')
 
     class Meta:
         managed = False

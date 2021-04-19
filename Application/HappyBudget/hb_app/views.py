@@ -40,3 +40,8 @@ def dummy(request):
 
     random = {'wow':'wow'}
     return render(request,'hb_app/dummy.html',context=date_dict)
+
+def interactivePet(request):
+    random = {'wow':'wow'}
+    return render(request,'hb_app/interactivePet.html',context=random)
+

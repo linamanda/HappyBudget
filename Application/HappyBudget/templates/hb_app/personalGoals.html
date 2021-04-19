@@ -24,9 +24,15 @@
         <p> this is where goals will go</p>
         {% if personal_goals %}
             <p>personal goals are found</p>
+            {% for goal in personal_goals%}
+                <p>{{ goal.goal_name }}</p>
+                <p>{{ goal.user_id }}</p>
+            {% endfor %}
         {% else %}
             <p>personal goals are not found!</p>
         {% endif %}
     </div>
+
+
   </body>
 </html>
