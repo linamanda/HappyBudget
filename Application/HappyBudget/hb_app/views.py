@@ -33,7 +33,9 @@ def personalGoals(request):
 
 def dummy(request):
     webpages_list = Users.objects.order_by('user_id').using('HappyBudget')
+    
     date_dict = {'access_records':webpages_list}
 
     random = {'wow':'wow'}
+
     return render(request,'hb_app/dummy.html',context=date_dict)
