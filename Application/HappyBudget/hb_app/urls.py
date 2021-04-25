@@ -10,6 +10,12 @@ urlpatterns = [
     path('finances',views.finances, name='finances'),
     path('home',views.home, name='home'),
     path('login',views.login, name='login'),
+
+    path('signUp', views.signUp, name = 'signUp'),
+    path('processSignUp', views.processSignUp, name = 'processSignUp'),
+    path('processLogin', views.processLogin, name = 'processLogin'),
+
+
     path('personalGoals',views.personalGoals, name='personalGoals'),
     path('interactivePet',views.interactivePet, name='interactivePet'),
     #random file to test db connections

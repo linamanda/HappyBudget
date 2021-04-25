@@ -25,7 +25,7 @@ urlpatterns = [
     #views.index because we called the function index
     path('', views.index, name='index'), 
     path('png', views.png, name='png'), #this lets it so you do not need 'first_appl/png'
-
+    path('formpage/', views.form_name_view, name = 'form_name'),
     #using url includes
     path('first_app/', include('first_app.urls')),
     path('hb_app/', include('hb_app.urls')),
