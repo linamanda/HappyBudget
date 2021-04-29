@@ -78,17 +78,13 @@ WSGI_APPLICATION = 'HappyBudget.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
-    },
-    'HappyBudget':{
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'happybudget',
         'PASSWORD': 'happybudget',
         'HOST': 'happybudgetdb.c2wykpc0pxkd.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
-    }
+    },
 }
 
 

@@ -67,14 +67,14 @@ def login(request):
         return render(request,'hb_app/login.html', context={'form': form})
 
 def personalGoals(request):
-    goals_list = Goals.objects.order_by('goal_id').using('HappyBudget')
+    goals_list = Goals.objects.order_by('goal_id')
     date_dict = {'personal_goals':goals_list}
 
     random = {'wow':'wow'}
     return render(request,'hb_app/personalGoals.html',context=date_dict)
 
 def dummy(request):
-    webpages_list = Users.objects.order_by('user_id').using('HappyBudget')
+    webpages_list = Users.objects.order_by('user_id')
     
     date_dict = {'access_records':webpages_list}
 
@@ -86,7 +86,7 @@ def interactivePet(request):
     random = {'wow':'wow'}
     return render(request,'hb_app/interactivePet.html',context=random)
 
-def newPage(request):
+def newGoal(request):
     name = request.POST.get("goalname1")
     target = request.POST.get("goaltarget1")
     current = request.POST.get("goalcurrent1")
@@ -96,9 +96,16 @@ def newPage(request):
     #############################
 
     o_ref = Goals(goal_name=name, goal_target=target, goal_current=current)
-    o_ref.save(using ='HappyBudget')
+    o_ref.save()
 
-    return render(request, 'hb_app/personalGoals.html', {"message": "registered"})
+    #return render(request, 'hb_app/personalGoals.html', {"message": "registered"})
+    return redirect('personalGoals')
+    
+def deleteGoal(request, gn):
+    goal_to_delete = Goals.objects.get(goal_name=gn)
+    goal_to_delete.delete()
+    return redirect('personalGoals')
+
 
 def signUp(request):
     form = forms.SignUpForm()
@@ -135,7 +142,7 @@ def processSignUp(request):
             #password = request.POST.get("password")
             #email = request.POST.get("email")
             #webpages_list = Users.objects.order_by('user_id').using('HappyBudget')
-            users_list = Users.objects.values_list('user_id', 'user_email').filter(user_email=email).using('HappyBudget')
+            users_list = Users.objects.values_list('user_id', 'user_email').filter(user_email=email)
             if len(users_list) > 0:
                 #form = forms.SignUpForm()
                 #return render(request, 'hb_app/signUp.html', {"message": "E-mail already registered", 'form':form})
@@ -145,7 +152,7 @@ def processSignUp(request):
             else:
                 #form = forms.SignUpForm()
                 o_ref = Users(user_name=username, user_password=password, user_email=email)
-                o_ref.save(using ='HappyBudget')
+                o_ref.save()
                 #return render(request, 'hb_app/login.html', {"message": "Account has been created", 'form':form})
                 print("CREATE ACCOUNT")
                 #login(request)
@@ -166,7 +173,7 @@ def processLogin(request):
             # DO SOMETHING HERE 
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            users_list = Users.objects.values_list('user_id', 'user_email').filter(user_name=username).using('HappyBudget')
+            users_list = Users.objects.values_list('user_id', 'user_email').filter(user_name=username)
             if len(users_list) > 0:
                 #valid user 
                 request.session['username'] = username
