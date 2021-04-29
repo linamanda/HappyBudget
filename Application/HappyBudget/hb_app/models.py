@@ -26,7 +26,7 @@ class Transactions(models.Model):
     transaction_id = models.AutoField(db_column='transaction_ID', primary_key=True)
     transaction_date = models.DateTimeField(blank=True, null=True)
     transaction_amt = models.TextField(blank=True, null=True)  # This field type is a guess.
-
+    user_id = models.IntegerField(db_column='user_id')
     class Meta:
         managed = False
         db_table = 'Transactions'
@@ -36,6 +36,7 @@ class Users(models.Model):
     #user_id = models.IntegerField(db_column='user_ID', primary_key=True)  # Field name made lowercase.
     user_id = models.AutoField(db_column='user_ID', primary_key=True)
     user_name = models.CharField(max_length=40, blank=True, null=True)
+    user_PFname = models.CharField(max_length=40, blank=True, null=True)
     user_password = models.CharField(max_length=40, blank=True, null=True)
     user_email = models.CharField(max_length=40, blank=True, null=True)
 

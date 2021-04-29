@@ -14,7 +14,7 @@ urlpatterns = [
     path('signUp', views.signUp, name = 'signUp'),
     path('processSignUp', views.processSignUp, name = 'processSignUp'),
     path('processLogin', views.processLogin, name = 'processLogin'),
-
+    path('processLogOut', views.processLogOut, name = 'processLogOut'),
 
     path('personalGoals',views.personalGoals, name='personalGoals'),
     path('interactivePet',views.interactivePet, name='interactivePet'),

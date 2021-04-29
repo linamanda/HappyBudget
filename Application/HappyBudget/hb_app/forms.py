@@ -10,6 +10,7 @@ def check_for_z(value):
 
 class SignUpForm(forms.Form):
     username = forms.CharField()
+    profile_name = forms.CharField()
     password = forms.CharField(widget = forms.PasswordInput)
     verify_password = forms.CharField(widget = forms.PasswordInput)
     email = forms.EmailField()

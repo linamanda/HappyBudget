@@ -10,7 +10,10 @@
     <div class="homeMainContent">
       <div class="homeHeadTitle">
         <p>Welcome back,</p>
-        <p>[NAME]</p>
+        {% if name %}
+        <p>{{name}}</p>
+        {% endif %}
+        
       </div>
 
       <div class="homeNav">
@@ -26,7 +29,7 @@
           <img src="{% static "images/goalsIcon.png"%}" alt="Goals">
         </a>
 
-        <a href="#">LOGOUT</a>
+        <a href="processLogOut">LOGOUT</a>
       </div>
     </div>
   </body>
