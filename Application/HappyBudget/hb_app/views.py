@@ -155,11 +155,13 @@ def newGoal(request):
 
 def personalGoals(request):
     if 'PFname' in request.session:
+        if 'userID' in request.session:
+            userID = request.session['userID']
         goals_list = Goals.objects.order_by('goal_id')
-        date_dict = {'personal_goals':goals_list}
+        my_dict = {'personal_goals':goals_list, 'user_ID':userID}
 
         random = {'wow':'wow'}
-        return render(request,'hb_app/personalGoals.html',context=date_dict)
+        return render(request,'hb_app/personalGoals.html',context=my_dict)
     else: 
         return redirect('login')
     
