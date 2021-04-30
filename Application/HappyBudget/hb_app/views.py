@@ -102,10 +102,11 @@ def processLogin(request):
             # DO SOMETHING HERE 
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            users_list = Users.objects.values_list('user_id', 'user_email').filter(user_name=username).values('user_PFname')
+            users_list = Users.objects.values_list('user_id', 'user_email').filter(user_name=username).values('user_PFname', 'user_id')
             if len(users_list) > 0:
                 #valid user 
                 request.session['PFname'] = users_list[0]['user_PFname']
+                request.session['userID'] = users_list[0]['user_id']
                 return redirect('home')
             #wrong login information
             else:
@@ -122,6 +123,7 @@ def processLogOut(request):
     form = forms.LoginForm()
     if 'PFname' in request.session:
             del request.session['PFname']
+            del request.session['userID']
             request.session.modified = True
             return redirect("login")
     else:
@@ -131,6 +133,9 @@ def processLogOut(request):
 
 def newGoal(request):
     if 'PFname' in request.session:
+        if 'userID' in request.session:
+            userID = request.session['userID']
+            #print(userID)
         name = request.POST.get("goalname1")
         target = request.POST.get("goaltarget1")
         current = request.POST.get("goalcurrent1")
@@ -139,7 +144,7 @@ def newGoal(request):
         goal_id_TEMP = 10
         #############################
 
-        o_ref = Goals(goal_name=name, goal_target=target, goal_current=current)
+        o_ref = Goals(goal_name=name, goal_target=target, goal_current=current, user_id=userID)
         o_ref.save()
 
         #return render(request, 'hb_app/personalGoals.html', {"message": "registered"})
