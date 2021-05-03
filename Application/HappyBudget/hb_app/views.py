@@ -116,11 +116,34 @@ def home(request):
 
 def interactivePet(request):
     if 'PFname' in request.session:
+        if 'userID' in request.session:
+            userID = request.session['userID']
+        goals_list = Goals.objects.order_by('goal_id')
+        my_dict = {'personal_goals':goals_list, 'user_ID':userID}
+
         random = {'wow':'wow'}
-        return render(request,'hb_app/interactivePet.html',context=random)
+        return render(request,'hb_app/interactivePet.html',context=my_dict)
     else:
         return redirect('login')
 
+def feedGoal(request, gn):
+    if 'PFname' in request.session:
+        goal_to_delete = Goals.objects.get(goal_name=gn)
+        goal_to_delete.delete()
+        return redirect('interactivePet_eating')
+    else:
+        return redirect('login')
+
+def interactivePet_eating(request):
+    if 'PFname' in request.session:
+        if 'userID' in request.session:
+            userID = request.session['userID']
+        goals_list = Goals.objects.order_by('goal_id')
+        my_dict = {'personal_goals':goals_list, 'user_ID':userID}
+        random = {'wow':'wow'}
+        return render(request,'hb_app/interactivePet_eating.html',context=my_dict)
+    else:
+        return redirect('login')
 
 def login(request):
     form = forms.LoginForm()
