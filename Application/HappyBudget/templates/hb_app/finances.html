@@ -54,7 +54,26 @@
         </div>
 
         <div class="transactionHistory">
-
+          {% if trans_list %}
+          <table style="width:100%" class="transHist">
+              <tr>
+                  <th>Transaction Type</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+              </tr>
+              {% for trans in transHist %}
+              {% ifequal tran.user_id user_ID %}
+              <tr>
+                  <th>{{trans.transaction_type}}</th>
+                  <th>{{trans.transaction_amt}}</th>
+                  <th>{{trans.transaction_date}}</th>
+              </tr>
+              {% endifequal %}
+              {% endfor %}
+            </table>
+            {% else %}
+            <p>no transactions found!</p>
+            {% endif %}
         </div>
       </div>
     </div>

@@ -78,6 +78,11 @@ def dummy(request):
 
 def finances(request):
     if 'PFname' in request.session:
+        if 'userID' in request.session:
+            userID = request.session['userID']
+        trans_list = Transactions.objects.order_by('transaction_id')
+        transDict = {'transaction':trans_list, 'user_ID':userID}
+
         random = {'wow':'wow'}
         return render(request,'hb_app/finances.html',context=random)
     else:
