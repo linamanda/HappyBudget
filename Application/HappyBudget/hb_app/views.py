@@ -3,8 +3,19 @@ from django.http import HttpResponse
 from hb_app.models import Goals,Transactions,Users
 
 from . import forms 
-
+import bcrypt
 # Create your views here.
+
+#============ BCRYPT STUFF =================
+def get_hashed_password(plain_text_password):
+    # Hash a password for the first time
+    #   (Using bcrypt, the salt is saved into the hash itself)
+    return bcrypt.hashpw(plain_text_password.encode('utf8'), bcrypt.gensalt())
+
+def check_password(plain_text_password, hashed_password):
+    # Check hashed password. Using bcrypt, the salt is saved into the hash itself
+    return bcrypt.checkpw(plain_text_password.encode('utf8'), hashed_password.encode('utf8'))
+#================================
 
 #======================= THERE ARENT USED =============================
 def index(request):
@@ -102,8 +113,14 @@ def processLogin(request):
             # DO SOMETHING HERE 
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            users_list = Users.objects.values_list('user_id', 'user_email').filter(user_name=username).values('user_PFname', 'user_id')
-            if len(users_list) > 0:
+
+            #encrypted_password = get_hashed_password(password)
+            #check_password(password, )
+
+            
+
+            users_list = Users.objects.values_list('user_id', 'user_email').filter(user_name=username).values('user_PFname', 'user_id','user_password')
+            if len(users_list) > 0 and check_password(password, users_list[0]['user_password']):
                 #valid user 
                 request.session['PFname'] = users_list[0]['user_PFname']
                 request.session['userID'] = users_list[0]['user_id']
@@ -218,10 +235,9 @@ def processSignUp(request):
             password = form.cleaned_data['password']
             profile_name = form.cleaned_data['profile_name']
             email = form.cleaned_data['email']
-            #username = request.POST.get("username")
-            #password = request.POST.get("password")
-            #email = request.POST.get("email")
-            #webpages_list = Users.objects.order_by('user_id').using('HappyBudget')
+
+            encrypted_password = get_hashed_password(password)
+
             users_list = Users.objects.values_list('user_id', 'user_email').filter(user_email=email)
             if len(users_list) > 0:
                 #form = forms.SignUpForm()
@@ -231,7 +247,7 @@ def processSignUp(request):
                 return redirect('signUp')
             else:
                 #form = forms.SignUpForm()
-                o_ref = Users(user_name=username, user_password=password, user_email=email, user_PFname=profile_name)
+                o_ref = Users(user_name=username, user_password=encrypted_password.decode('utf8'), user_email=email, user_PFname=profile_name)
                 o_ref.save()
                 #return render(request, 'hb_app/login.html', {"message": "Account has been created", 'form':form})
                 print("CREATE ACCOUNT")
