@@ -84,7 +84,7 @@ def finances(request):
         transDict = {'transaction':trans_list, 'user_ID':userID}
 
         random = {'wow':'wow'}
-        return render(request,'hb_app/finances.html',context=random)
+        return render(request,'hb_app/finances.html',context=transDict)
     else:
         return redirect('login')
 
