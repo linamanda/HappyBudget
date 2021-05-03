@@ -62,7 +62,7 @@
                   <th>Date</th>
               </tr>
               {% for trans in transaction %}
-              {% ifequal tran.user_id user_ID %}
+              {% ifequal trans.user_id user_ID %}
               <tr>
                   <th>{{trans.transaction_type}}</th>
                   <th>{{trans.transaction_amt}}</th>
