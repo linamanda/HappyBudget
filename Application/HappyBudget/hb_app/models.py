@@ -24,8 +24,9 @@ class Goals(models.Model):
 class Transactions(models.Model):
     #transaction_id = models.IntegerField(db_column='transaction_ID', primary_key=True)  # Field name made lowercase.
     transaction_id = models.AutoField(db_column='transaction_ID', primary_key=True)
-    transaction_date = models.DateTimeField(blank=True, null=True)
-    transaction_amt = models.TextField(blank=True, null=True)  # This field type is a guess.
+    transaction_date = models.DateField(db_column='transaction_date', blank=True, null=True)
+    transaction_amt = models.TextField(db_column='transaction_amt', blank=True, null=True)  # This field type is a guess.
+    transaction_type = models.CharField(db_column='transaction_type', max_length=40, blank=True, null=True)
     user_id = models.IntegerField(db_column='user_id')
     class Meta:
         managed = False

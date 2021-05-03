@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.db import connection
 from hb_app.models import Goals,Transactions,Users
 
-from . import forms 
+from . import forms
 import bcrypt
 # Create your views here.
 
@@ -33,22 +34,22 @@ def accounts(request):
     if 'PFname' in request.session:
         random = {'wow':'wow'}
         return render(request,'hb_app/accounts.html',context=random)
-    else: 
+    else:
         return redirect('login')
 
 
-    
+
 
 def deleteGoal(request, gn):
     if 'PFname' in request.session:
         goal_to_delete = Goals.objects.get(goal_name=gn)
         goal_to_delete.delete()
         return redirect('personalGoals')
-    else: 
+    else:
         return redirect('login')
 
 
-    
+
 
 def dummy(request):
     webpages_list = Users.objects.order_by('user_id')
@@ -60,27 +61,42 @@ def finances(request):
     if 'PFname' in request.session:
         random = {'wow':'wow'}
         return render(request,'hb_app/finances.html',context=random)
-    else: 
+    else:
+        return redirect('login')
+
+def addTransaction(request):
+    if 'PFname' in request.session:
+        if 'userID' in request.session:
+            userID = request.session['userID']
+        type = request.POST.get("transType")
+        amount = request.POST.get("transAmount")
+        date = request.POST.get("date")
+
+        o_ref = Transactions(transaction_date=date, transaction_amt=amount, user_id=userID, transaction_type=type)
+        o_ref.save()
+
+        return redirect('finances')
+    else:
         return redirect('login')
 
 
-    
+
 
 def home(request):
     if 'PFname' in request.session:
         print("logged in")
         name = {'name':request.session['PFname']}
         return render(request,'hb_app/home.html',context=name)
-    else: 
+    else:
         return redirect('login')
 
 def interactivePet(request):
     if 'PFname' in request.session:
         random = {'wow':'wow'}
         return render(request,'hb_app/interactivePet.html',context=random)
-    else: 
+    else:
         return redirect('login')
-    
+
 
 def login(request):
     form = forms.LoginForm()
@@ -94,7 +110,7 @@ def login(request):
             request.session.modified = True
             return render(request,'hb_app/login.html',context={'message': old_value, 'form': form})
         else:
-            #remove the old message 
+            #remove the old message
             del request.session['message']
             request.session.modified = True
             return render(request,'hb_app/login.html', context={'form': form})
@@ -110,18 +126,18 @@ def processLogin(request):
         print(form.is_valid())
         if(form.is_valid()):
             print("RIGHJT ERE ")
-            # DO SOMETHING HERE 
+            # DO SOMETHING HERE
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
 
             #encrypted_password = get_hashed_password(password)
             #check_password(password, )
 
-            
+
 
             users_list = Users.objects.values_list('user_id', 'user_email').filter(user_name=username).values('user_PFname', 'user_id','user_password')
             if len(users_list) > 0 and check_password(password, users_list[0]['user_password']):
-                #valid user 
+                #valid user
                 request.session['PFname'] = users_list[0]['user_PFname']
                 request.session['userID'] = users_list[0]['user_id']
                 return redirect('home')
@@ -166,9 +182,9 @@ def newGoal(request):
 
         #return render(request, 'hb_app/personalGoals.html', {"message": "registered"})
         return redirect('personalGoals')
-    else: 
+    else:
         return redirect('login')
-    
+
 
 def personalGoals(request):
     if 'PFname' in request.session:
@@ -179,13 +195,13 @@ def personalGoals(request):
 
         random = {'wow':'wow'}
         return render(request,'hb_app/personalGoals.html',context=my_dict)
-    else: 
+    else:
         return redirect('login')
-    
+
 
 def signUp(request):
     form = forms.SignUpForm()
-    if 'message' in request.session: 
+    if 'message' in request.session:
         if request.session['message'] == "E-mail already registered" or request.session['message'] == "Either e-mail does not match or passwords do not match":
             print("HERE")
             old_value = request.session['message']
@@ -193,7 +209,7 @@ def signUp(request):
             request.session.modified = True
             return render(request, 'hb_app/signUp.html', {'form':form, 'message':old_value})
         else:
-            #remove the old message 
+            #remove the old message
             del request.session['message']
             request.session.modified = True
             return render(request, 'hb_app/signUp.html', {'form':form})
@@ -205,7 +221,7 @@ def signUp(request):
 
 def signUp(request):
     form = forms.SignUpForm()
-    if 'message' in request.session: 
+    if 'message' in request.session:
         if request.session['message'] == "E-mail already registered" or request.session['message'] == "Either e-mail does not match or passwords do not match":
             print("HERE")
             old_value = request.session['message']
@@ -213,7 +229,7 @@ def signUp(request):
             request.session.modified = True
             return render(request, 'hb_app/signUp.html', {'form':form, 'message':old_value})
         else:
-            #remove the old message 
+            #remove the old message
             del request.session['message']
             request.session.modified = True
             return render(request, 'hb_app/signUp.html', {'form':form})
@@ -228,7 +244,7 @@ def processSignUp(request):
         print(form.is_valid())
         if(form.is_valid()):
             print("RIGHJT ERE ")
-            # DO SOMETHING HERE 
+            # DO SOMETHING HERE
             #print("VALDIATION SUCCESS")
             #print("NAME: " + form.cleaned_data['username'])
             username = form.cleaned_data['username']
@@ -258,4 +274,3 @@ def processSignUp(request):
         request.session['message'] = "Either e-mail does not match or passwords do not match"
         return redirect('signUp')
     return render(request, 'hb_app/login.html', {"message": "ERROR OCCURED"})
-
