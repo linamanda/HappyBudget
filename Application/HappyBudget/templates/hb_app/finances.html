@@ -23,6 +23,7 @@
     <div class="financesMainContent">
       <div class="financesBalance">
         <h2>Balance</h2>
+        <p>${{ totalBal }}</p>
       </div>
 
       <div class="financesVisualBreakdown">
@@ -42,9 +43,10 @@
               <option value="food">Food</option>
               <option value="bills">Bills</option>
               <option value="shopping">Shopping</option>
+              <option value="other">Other Spending</option>
             </select>
             <label for="transAmount">Amount:</label>
-            <input type="number" placeholder="Amount" name="transAmount" required />
+            <input type="number" placeholder="Amount" name="transAmount" min="0" step=".01" oninput="validity.valid||(value='');" required />
 
             <label for="date">Date:</label>
             <input type="date" id="start" name="date" value="2021-05-01" min="2018-01-01" max="2022-12-31">

@@ -80,13 +80,34 @@ def finances(request):
     if 'PFname' in request.session:
         if 'userID' in request.session:
             userID = request.session['userID']
+
         trans_list = Transactions.objects.order_by('transaction_id')
-        transDict = {'transaction':trans_list, 'user_ID':userID}
+
+        totalBal = 0.00
+        for trans in trans_list:
+            if trans.user_id == userID:
+                if trans.transaction_type == 'deposit':
+                    totalBal += float(trans.transaction_amt.replace(",","").replace("$",""))
+                else:
+                    totalBal -= float(trans.transaction_amt.replace(",","").replace("$",""))
+
+        transDict = {'transaction':trans_list, 'user_ID':userID, 'totalBal':totalBal}
 
         random = {'wow':'wow'}
         return render(request,'hb_app/finances.html',context=transDict)
     else:
         return redirect('login')
+
+def getTotalBalance():
+    totalBal = 0.00
+
+    for trans in transDict["transaction"]:
+        if trans.user_id == userID:
+            if trans.transaction_type == 'deposit':
+                totalBal += float(trans.transaction_amt.replace(",","").replace("$",""))
+            else:
+                totalBal -= float(trans.transaction_amt.replace(",","").replace("$",""))
+    return totalBal
 
 def addTransaction(request):
     if 'PFname' in request.session:

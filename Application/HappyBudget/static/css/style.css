@@ -248,6 +248,12 @@
 
 .transactionHistory {
   grid-area: transHist;
+  margin-bottom: 3vw;
+}
+
+.transHist tr:nth-of-type(1) {
+  font-size: 2em;
+  height: 6vw;
 }
 
 /* Accounts page */
