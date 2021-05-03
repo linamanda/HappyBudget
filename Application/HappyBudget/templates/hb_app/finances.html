@@ -54,14 +54,14 @@
         </div>
 
         <div class="transactionHistory">
-          {% if trans_list %}
+          {% if transaction %}
           <table style="width:100%" class="transHist">
               <tr>
                   <th>Transaction Type</th>
                   <th>Amount</th>
                   <th>Date</th>
               </tr>
-              {% for trans in transHist %}
+              {% for trans in transaction %}
               {% ifequal tran.user_id user_ID %}
               <tr>
                   <th>{{trans.transaction_type}}</th>
