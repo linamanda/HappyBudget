@@ -4,6 +4,7 @@ from django.db import connection
 from hb_app.models import Goals,Transactions,Users
 
 from . import forms
+from datetime import date
 import bcrypt
 # Create your views here.
 
@@ -44,6 +45,24 @@ def deleteGoal(request, gn):
     if 'PFname' in request.session:
         goal_to_delete = Goals.objects.get(goal_name=gn)
         goal_to_delete.delete()
+        return redirect('personalGoals')
+    else:
+        return redirect('login')
+
+def investInGoal(request, gn):
+    if 'PFname' in request.session:
+        if 'userID' in request.session:
+            userID = request.session['userID']
+        goal_to_invest = Goals.objects.get(goal_name=gn)
+        amount = request.POST.get("investAmt")
+        total = float(goal_to_invest.goal_current[1:]) + float(amount)
+        goal_to_invest.goal_current = str(total)
+        goal_to_invest.save()
+        curr_date = date.today().strftime("%Y-%m-%d")
+
+        o_ref = Transactions(transaction_date=curr_date, transaction_amt=amount, user_id=userID, transaction_type="goals investment")
+        o_ref.save()
+
         return redirect('personalGoals')
     else:
         return redirect('login')

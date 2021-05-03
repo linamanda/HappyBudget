@@ -6,9 +6,9 @@
     <title>Happy Budget - Personal Goals</title>
     <link rel="stylesheet" href="{%static "css/style.css"%}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
  </head>
-  
+
  <body>
       <div class="personalGoalsNav">
           <a href="home">Happy Budget</a>
@@ -25,7 +25,7 @@
           <div>
               <p> this is where goals will go</p>
               {% if personal_goals %}
-              <table style="width:100%">
+              <table style="width:100%" class="goalsTable">
                   <tr>
                       <th>Goal</th>
                       <th>Savings Needed</th>
@@ -42,6 +42,13 @@
                       <th>
                           <a href="{% url 'delete' goal.goal_name %}">Delete</a>
                       </th>
+                      <th>
+                          <form action="{% url 'invest' goal.goal_name %}" method="post">
+                              {% csrf_token %}
+                              <input type="number" placeholder="Amount" name="investAmt" required />
+                              <button type="submit">Invest</button>
+                          </form>
+                      </th>
                   </tr>
                   {% endifequal %}
                   {% endfor %}
@@ -51,7 +58,7 @@
               {% endif %}
           </div>
 
-          <div>
+          <div class="addGoalForm">
               <form action="new" method="post">
                   {% csrf_token %}
                   <table align="center">

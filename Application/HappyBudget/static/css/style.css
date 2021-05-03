@@ -293,3 +293,13 @@
   justify-content: flex-end;
   align-items: center;
 }
+
+.goalsTable tr:nth-of-type(1) {
+  font-size: 2em;
+}
+
+.addGoalForm {
+  margin-top: 1vw;
+  display: flex;
+  justify-content: center;
+}
