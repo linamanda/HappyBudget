@@ -209,8 +209,16 @@
   margin-top: 3vw;
 }
 
+.financesMainContent h2 {
+  font-size: 2vw;
+  font-family: 'Roboto', sans-serif;
+}
+
 .financesBalance {
   grid-area: balances;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .financesVisualBreakdown {
@@ -241,6 +249,10 @@
   margin-left: 3vw;
 }
 
+.newTransaction input[type="number"] {
+  padding: 0.1em 0.2em;
+}
+
 .newTransaction button {
   margin-left: 3vw;
   padding: 0.2vw 0.5vw;
@@ -254,6 +266,24 @@
 .transHist tr:nth-of-type(1) {
   font-size: 2em;
   height: 6vw;
+}
+
+.transHist, .transHist tr, .transHist th {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.transHist tr {
+  height: 2vw;
+}
+
+.financesBalance p {
+  margin-top: 1vw;
+  background-color: #34eba4;
+  display: block;
+  padding: 1vw 2vw;
+  border-radius: 1vw;
+  font-size: 3vw;
 }
 
 /* Accounts page */
@@ -300,12 +330,88 @@
   align-items: center;
 }
 
+.personalGoalsTable {
+  margin-left: 5vw;
+  margin-right: 5vw;
+  margin-top: 3vw;
+}
+
+.goalsTable, .goalsTable tr, .goalsTable th {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
 .goalsTable tr:nth-of-type(1) {
   font-size: 2em;
+  height: 5vw;
+}
+
+.goalsTable tr:not(:first-child) th:nth-last-child(1) {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 3vw;
+}
+
+.goalsTable input[type="number"] {
+  padding: 0.1em 0.2em;
+}
+
+.goalsTable a, .goalsTable form {
+  margin-left: 2vw;
+}
+
+.goalsTable a {
+  display: inline-block;
+  padding: 3px 10px 3px 10px;
+  border: 1px solid #a11649;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #bf1956;
+  text-decoration: none;
+  color: white;
+  font-family: 'Arial';
+  font-weight: lighter;
+}
+
+.goalsTable a:hover {
+  background-color: #e01d65;
+}
+
+.goalsTable button[type=submit] {
+  display: inline-block;
+  padding: 3px 10px 3px 10px;
+  border: 1px solid #118552;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #15a164;
+  color: white;
+}
+
+.goalsTable button[type=submit]:hover {
+  background-color: #16b871;
 }
 
 .addGoalForm {
-  margin-top: 1vw;
+  margin-top: 5vw;
+  margin-bottom: 3vw;
   display: flex;
   justify-content: center;
+}
+
+.addGoalForm tr:nth-of-type(1) th:nth-of-type(1) {
+  font-size: 2vw;
+}
+
+.addGoalForm input[type="number"], .addGoalForm input[type="text"] {
+  padding: 0.1em 0.2em;
+  margin-top: 0.5vw;
+}
+
+.addGoalForm button[type=submit] {
+  display: inline-block;
+  padding: 3px 10px 3px 10px;
+  cursor: pointer;
+  margin-top: 1vw;
 }

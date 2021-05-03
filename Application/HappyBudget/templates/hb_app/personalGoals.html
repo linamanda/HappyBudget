@@ -22,15 +22,14 @@
       </div>
 
       <div class="personalGoalsMainContent">
-          <div>
-              <p> this is where goals will go</p>
+          <div class="personalGoalsTable">
               {% if personal_goals %}
               <table style="width:100%" class="goalsTable">
                   <tr>
                       <th>Goal</th>
                       <th>Savings Needed</th>
                       <th>Current Savings</th>
-                      <th>User Id(Hide this later)</th>
+                      <th>Actions</th>
                   </tr>
                   {% for goal in personal_goals %}
                   {% ifequal goal.user_id user_ID %}
@@ -38,11 +37,9 @@
                       <th>{{goal.goal_name}}</th>
                       <th>{{goal.goal_target}}</th>
                       <th>{{goal.goal_current}}</th>
-                      <th>{{goal.user_id }}</th>
                       <th>
                           <a href="{% url 'delete' goal.goal_name %}">Delete</a>
-                      </th>
-                      <th>
+
                           <form action="{% url 'invest' goal.goal_name %}" method="post">
                               {% csrf_token %}
                               <input type="number" placeholder="Amount" name="investAmt" required />

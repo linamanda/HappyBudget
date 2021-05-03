@@ -81,7 +81,7 @@ def finances(request):
         if 'userID' in request.session:
             userID = request.session['userID']
 
-        trans_list = Transactions.objects.order_by('transaction_id')
+        trans_list = Transactions.objects.order_by('-transaction_date')
 
         totalBal = 0.00
         for trans in trans_list:
