@@ -19,6 +19,8 @@ urlpatterns = [
 
     path('personalGoals',views.personalGoals, name='personalGoals'),
     path('interactivePet',views.interactivePet, name='interactivePet'),
+    path('feed/<str:gn>', views.feedGoal, name='feed'),
+    path('interactivePet_eating',views.interactivePet_eating, name='interactivePet_eating'),
     #random file to test db connections
     path('dummy',views.dummy, name='dummy'),
     path('new', views.newGoal),
