@@ -4,46 +4,55 @@
 <head>
     <meta charset="utf-8">
     <title>Happy Budget - Interactive Pet</title>
-    <link rel="stylesheet" href="{%static " css /style.css"%}">
+    <link rel="stylesheet" href="{%static "css/style.css"%}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <p>Interactive pet</p>
-    <div>
-        <img src="{% static "images/test.gif"%}" alt="Pet">
+    <div class="petNav">
+        <a href="home">Happy Budget</a>
+        <p>
+            <img src="{% static "images/navIcon.png"%}" alt="Navigation">
+        </p>
     </div>
 
-    <div>
-        <p> this is where goals will go</p>
-        {% if personal_goals %}
-        <table style="width:100%">
-            <tr>
-                <th>Goal</th>
-                <th>Savings Needed</th>
-                <th>Current Savings</th>
-                <th>User Id(Hide this later)</th>
-            </tr>
-            {% for goal in personal_goals %}
-            {% ifequal goal.user_id user_ID %}
-                {% ifequal goal.goal_target goal.goal_current %}
-                    <tr>
-                        <th>{{goal.goal_name}}</th>
-                        <th>{{goal.goal_target}}</th>
-                        <th>{{goal.goal_current}}</th>
-                        <th>{{goal.user_id }}</th>
-                        <th>
-                            <a href="{% url 'feed' goal.goal_name %}">Feed!</a>
-                        </th>
-                    </tr>
+    <div class="petHero">
+        <p>Feed me completed goals!</p>
+        <img src="{% static "images/mascot.gif"%}" alt="Pet">
+    </div>
+
+    <div class="personalGoalsMainContent">
+        <div class="personalGoalsTable">
+            {% if personal_goals %}
+            <table style="width:100%" class="goalsTable">
+                <tr>
+                    <th>Goal</th>
+                    <!--<th>Savings Needed</th>-->
+                    <!--<th>Current Savings</th>-->
+                    <!--<th>User Id(Hide this later)</th>-->
+                    <th>Actions</th>
+                </tr>
+                {% for goal in personal_goals %}
+                {% ifequal goal.user_id user_ID %}
+                {% if goal.goal_target <= goal.goal_current %}
+                <tr>
+                    <th>{{goal.goal_name}}</th>
+                    <!--<th>{{goal.goal_target}}</th>
+                    <th>{{goal.goal_current}}</th>-->
+                    <!--<th>{{goal.user_id }}</th>-->
+                    <th>
+                        <a href="{% url 'feed' goal.goal_name %}">Feed!</a>
+                    </th>
+                </tr>
+                {% endif %}
                 {% endifequal %}
-            {% endifequal %}
-            {% endfor %}
-        </table>
-        {% else %}
-        <p>personal goals are not found!</p>
-        {% endif %}
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>personal goals are not found!</p>
+            {% endif %}
+        </div>
     </div>
 </body>
 </html>

@@ -84,11 +84,11 @@
 .homeNav {
   grid-area: nav;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-template-areas:
-    ". accounts . finances . goals ."
-    ". . . logout . . ."
+    ". accounts . finances . goals . pet ."
+    ". . . . logout . . . ."
 }
 
 .homeNav a {
@@ -137,6 +137,15 @@
 }
 
 .homeNav a:nth-of-type(4) {
+  grid-area: pet;
+  background-color: #dea300;
+}
+
+.homeNav a:nth-of-type(4):hover {
+  background-color: #fcb900;
+}
+
+.homeNav a:nth-of-type(5) {
   grid-area: logout;
   text-decoration: none;
   background-color: #ff4262;
@@ -151,18 +160,18 @@
   border-radius: 5px;
 }
 
-.homeNav a:nth-of-type(4):hover {
+.homeNav a:nth-of-type(5):hover {
   background-color: #db3232;
 }
 
 /* Finances page */
 
-.financesNav, .accountsNav, .personalGoalsNav {
+.financesNav, .accountsNav, .personalGoalsNav, .petNav {
   position: absolute;
   width: 100%;
 }
 
-.financesNav a:nth-of-type(1), .accountsNav a:nth-of-type(1), .personalGoalsNav a:nth-of-type(1) {
+.financesNav a:nth-of-type(1), .accountsNav a:nth-of-type(1), .personalGoalsNav a:nth-of-type(1), .petNav a:nth-of-type(1) {
   position: absolute;
   top: 0;
   left: 0;
@@ -174,7 +183,7 @@
   color: #ffcc00;
 }
 
-.financesNav img, .accountsNav img, .personalGoalsNav img {
+.financesNav img, .accountsNav img, .personalGoalsNav img, .petNav img {
   position: absolute;
   top: 0;
   right: 0;
@@ -415,4 +424,29 @@
   padding: 3px 10px 3px 10px;
   cursor: pointer;
   margin-top: 1vw;
+}
+
+/*Interactive Pet Page*/
+.petHero {
+    background-color: aquamarine;
+    height: 33vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.petHero img{
+    width: 500px;
+    height: 500px;
+}
+
+.petHero p{
+    font-size: 4vw;
+}
+
+.petReturn{
+    text-align: center;
+    font-size: 2vw;
+    font-weight: bold;
 }
