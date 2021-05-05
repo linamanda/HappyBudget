@@ -17,13 +17,15 @@
     </div>
 
     <div class="accountsHero">
-      <h1>MANAGE YOUR</h1>
-      <h1>CONNECTED ACCOUNTS</h1>
+      <h1>YOUR ACCOUNT</h1>
     </div>
 
     <div class="accountsMainContent">
-      <div class="accountsConnectedAccs">
-        <h2>Connected Accounts</h2>
+      <div class="accountInfo">
+        <h1>Account Information</h1>
+        <p>Name: {{ user.user_PFname }}</p>
+        <p>Username: {{ user.user_name }}</p>
+        <p>Email: {{ user.user_email }}</p>
       </div>
     </div>
   </body>

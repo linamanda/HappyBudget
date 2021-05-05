@@ -192,7 +192,7 @@
   align-items: flex-end;
 }
 
-.financesHero h1, .personalGoalsHero h1 {
+.financesHero h1, .personalGoalsHero h1, .accountsHero h1 {
   margin-bottom: 8vw;
   font-family: 'Roboto', sans-serif;
   font-size: 5vw;
@@ -297,26 +297,27 @@
   align-items: center;
 }
 
-.accountsHero h1 {
-  font-family: 'Roboto', sans-serif;
-  font-size: 5vw;
-}
-
-.accountsHero h1:nth-of-type(2) {
-  margin-bottom: 6vw;
-}
-
 .accountsMainContent {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-areas:
-    ". connAccs connAccs connAccs connAccs connAccs connAccs connAccs connAccs connAccs connAccs .";
+    ". accInfo accInfo accInfo accInfo accInfo accInfo accInfo accInfo accInfo accInfo .";
   grid-row-gap: 3vw;
   margin-top: 3vw;
+  margin-bottom: 3vw;
 }
 
-.accountsConnectedAccs {
-  grid-area: connAccs;
+.accountInfo {
+  grid-area: accInfo;
+}
+
+.accountInfo h1 {
+  margin-bottom: 2vw;
+}
+
+.accountInfo p {
+  margin-left: 5vw;
+  line-height: 2em;
 }
 
 /* Personal goals page */

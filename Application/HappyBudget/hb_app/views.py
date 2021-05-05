@@ -33,8 +33,10 @@ def png(request):
 #======================= WE USE THESE ===================================
 def accounts(request):
     if 'PFname' in request.session:
-        random = {'wow':'wow'}
-        return render(request,'hb_app/accounts.html',context=random)
+        if 'userID' in request.session:
+            userID = request.session['userID']
+        user = Users.objects.get(user_id=userID)
+        return render(request,'hb_app/accounts.html',context={"user":user})
     else:
         return redirect('login')
 
