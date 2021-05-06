@@ -244,6 +244,9 @@
 
 .financesVisualBreakdown {
   grid-area: breakdown;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .financesTransactions {
@@ -460,6 +463,12 @@
 }
 
 .petReturn{
+    text-align: center;
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+.visualReturn{
     text-align: center;
     font-size: 2vw;
     font-weight: bold;

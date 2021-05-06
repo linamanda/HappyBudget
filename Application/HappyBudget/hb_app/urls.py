@@ -25,5 +25,6 @@ urlpatterns = [
     path('dummy',views.dummy, name='dummy'),
     path('new', views.newGoal),
     path('delete/<str:gn>', views.deleteGoal, name='delete'),
-    path('invest/<str:gn>', views.investInGoal, name='invest')
+    path('invest/<str:gn>', views.investInGoal, name='invest'),
+    path('pie-chart/', views.pie_chart, name='pie-chart'),
 ]

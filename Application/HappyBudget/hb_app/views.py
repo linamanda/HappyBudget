@@ -94,13 +94,59 @@ def finances(request):
                 else:
                     totalBal -= float(trans.transaction_amt.replace(",","").replace("$",""))
 
-        transDict = {'transaction':trans_list, 'user_ID':userID, 'totalBal':totalBal, 'financial_tips':financial_tips}
+        transDict = {'transaction':trans_list, 'user_ID':userID, 'totalBal':totalBal,\
+                     'financial_tips':financial_tips,}
 
         random = {'wow':'wow'}
         return render(request,'hb_app/finances.html',context=transDict)
     else:
         return redirect('login')
 
+def pie_chart(request):
+        if 'PFname' in request.session:
+            if 'userID' in request.session:
+                userID = request.session['userID']
+                deposit = 0
+                entertainment = 0
+                food = 0
+                bills = 0
+                shopping = 0
+                other = 0
+
+                labels = []
+                data = []
+                
+                queryset = Transactions.objects.order_by('-transaction_amt')
+                for trans in queryset:
+                    if trans.user_id == userID:
+                        if trans.transaction_type == 'deposit':
+                            deposit += float(trans.transaction_amt.replace(",","").replace("$",""))
+                        elif trans.transaction_type == 'entertainment':
+                            entertainment += float(trans.transaction_amt.replace(",","").replace("$",""))
+                        elif trans.transaction_type == 'food':
+                            food += float(trans.transaction_amt.replace(",","").replace("$",""))
+                        elif trans.transaction_type == 'bills':
+                            bills += float(trans.transaction_amt.replace(",","").replace("$",""))
+                        elif trans.transaction_type == 'shopping':
+                            shopping += float(trans.transaction_amt.replace(",","").replace("$",""))
+                        elif trans.transaction_type == 'other':
+                            other += float(trans.transaction_amt.replace(",","").replace("$",""))
+                
+                labels.append('deposit')
+                data.append(str(deposit))
+                labels.append('entertainment')
+                data.append(str(entertainment))
+                labels.append('food')
+                data.append(str(food))
+                labels.append('bills')
+                data.append(str(bills))
+                labels.append('shopping')
+                data.append(str(shopping))
+                labels.append('other')
+                data.append(str(other))
+
+                return render(request, 'hb_app/pie-chart.html', {'labels': labels, 'data': data,})
+        
 def getTotalBalance():
     totalBal = 0.00
 
