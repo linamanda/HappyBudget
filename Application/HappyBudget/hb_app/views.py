@@ -36,7 +36,8 @@ def accounts(request):
         if 'userID' in request.session:
             userID = request.session['userID']
         user = Users.objects.get(user_id=userID)
-        return render(request,'hb_app/accounts.html',context={"user":user})
+        user_dict = {'user':user, 'financial_tips':financial_tips}
+        return render(request,'hb_app/accounts.html', context=user_dict)
     else:
         return redirect('login')
 
@@ -93,7 +94,7 @@ def finances(request):
                 else:
                     totalBal -= float(trans.transaction_amt.replace(",","").replace("$",""))
 
-        transDict = {'transaction':trans_list, 'user_ID':userID, 'totalBal':totalBal}
+        transDict = {'transaction':trans_list, 'user_ID':userID, 'totalBal':totalBal, 'financial_tips':financial_tips}
 
         random = {'wow':'wow'}
         return render(request,'hb_app/finances.html',context=transDict)
@@ -261,7 +262,7 @@ def personalGoals(request):
         if 'userID' in request.session:
             userID = request.session['userID']
         goals_list = Goals.objects.order_by('goal_id')
-        my_dict = {'personal_goals':goals_list, 'user_ID':userID}
+        my_dict = {'personal_goals':goals_list, 'user_ID':userID, 'financial_tips':financial_tips}
 
         random = {'wow':'wow'}
         return render(request,'hb_app/personalGoals.html',context=my_dict)
@@ -344,3 +345,21 @@ def processSignUp(request):
         request.session['message'] = "Either e-mail does not match or passwords do not match"
         return redirect('signUp')
     return render(request, 'hb_app/login.html', {"message": "ERROR OCCURED"})
+
+financial_tips = ["Prioritize paying off debt before you save for your goals—especially credit card debt. \
+        While they may have low minimum payments, they have high interest rates, and you will end up paying much more in the long run. Your credit score will also suffer.",
+                  "Stick to your budget! You cannot save if you are spending more than you are earning.",
+                  "Contribute to a retirement plan, whether it is a 401(k) or individual retirement account—your employer will often match your contribution. \
+                    These contributions can reduce taxable income. Interest accrues over time, which allows small, regular contributions to grow into significant retirement savings.",
+                  "To ensure that you adhere to your savings plan, resolve to set aside a minimum of 5% of your salary for savings before you start paying your bills. \
+                    Better yet, have money automatically deducted from your paycheck and deposited into a savings account.",
+                  "Investing may seem daunting, but it is a great way to diversify your savings. You can start investing easily—even with less than $100.",
+                  "Make a habit of keeping good records. It will help when you claim your allowable income tax deductions and credits.",
+                  "Don’t trust yourself to pay your taxes or periodically check on your credit? Use a financial calendar to keep track!",
+                  "When in doubt, look at the interest rates. Pay off loans with the highest interest rates and open savings accounts with the best interest rates.",
+                  "Do not fall victim to lifestyle inflation. If you can live comfortably below your means, you will end up with bigger savings.",
+                  "Saving means identifying creative ways to cut expenses. Eat out for lunch every day? Maybe consider packing a homemade lunch.",
+                  "The size of your emergency fund will vary depending on your lifestyle, monthly costs, income, and dependents. \
+                    You should have between three to six months of basic living expenses in your emergency fund."]
+#return render('/hb_app/finances.html', {'financial_tips':financial_tips})
+

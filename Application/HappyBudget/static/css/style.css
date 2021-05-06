@@ -197,14 +197,26 @@
   background-color: #00b536;
   height: 33vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  text-align: center;
 }
 
 .financesHero h1, .personalGoalsHero h1, .accountsHero h1 {
   margin-bottom: 8vw;
   font-family: 'Roboto', sans-serif;
   font-size: 5vw;
+}
+
+.financesTip {
+  width: 900px;
+  border: 10px solid yellow;
+  padding: 35px;
+  margin: 0px;
+  font-family: 'Helvetica', sans-serif;
+  font-size:0.75vw;
+  text-align: center
 }
 
 .financesMainContent {
@@ -302,8 +314,9 @@
   height: 33vw;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .accountsMainContent {
@@ -336,8 +349,9 @@
   height: 33vw;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .personalGoalsTable {
