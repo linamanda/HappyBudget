@@ -112,6 +112,7 @@ def pie_chart(request):
                 bills = 0
                 shopping = 0
                 other = 0
+                goals_investment = 0
 
                 labels = []
                 data = []
@@ -131,19 +132,22 @@ def pie_chart(request):
                             shopping += float(trans.transaction_amt.replace(",","").replace("$",""))
                         elif trans.transaction_type == 'other':
                             other += float(trans.transaction_amt.replace(",","").replace("$",""))
-                
-                labels.append('deposit')
+                        elif trans.transaction_type == 'goals investment':
+                            goals_investment += float(trans.transaction_amt.replace(",","").replace("$",""))                
+                labels.append('Deposit')
                 data.append(str(deposit))
-                labels.append('entertainment')
+                labels.append('Entertainment')
                 data.append(str(entertainment))
-                labels.append('food')
+                labels.append('Food')
                 data.append(str(food))
-                labels.append('bills')
+                labels.append('Bills')
                 data.append(str(bills))
-                labels.append('shopping')
+                labels.append('Shopping')
                 data.append(str(shopping))
-                labels.append('other')
+                labels.append('Other')
                 data.append(str(other))
+                labels.append('Goals Investment')
+                data.append(str(goals_investment))
 
                 return render(request, 'hb_app/pie-chart.html', {'labels': labels, 'data': data,})
         
