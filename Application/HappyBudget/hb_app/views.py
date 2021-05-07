@@ -46,7 +46,7 @@ def accounts(request):
 
 def deleteGoal(request, gn):
     if 'PFname' in request.session:
-        goal_to_delete = Goals.objects.get(goal_name=gn)
+        goal_to_delete = Goals.objects.get(goal_id=gn)
         goal_to_delete.delete()
         return redirect('personalGoals')
     else:
@@ -56,7 +56,7 @@ def investInGoal(request, gn):
     if 'PFname' in request.session:
         if 'userID' in request.session:
             userID = request.session['userID']
-        goal_to_invest = Goals.objects.get(goal_name=gn)
+        goal_to_invest = Goals.objects.get(goal_id=gn)
         amount = request.POST.get("investAmt")
         total = float(goal_to_invest.goal_current[1:]) + float(amount)
         goal_to_invest.goal_current = str(total)

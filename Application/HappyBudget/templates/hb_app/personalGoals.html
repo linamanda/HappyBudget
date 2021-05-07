@@ -41,9 +41,9 @@
                       <th>{{goal.goal_target}}</th>
                       <th>{{goal.goal_current}}</th>
                       <th>
-                          <a href="{% url 'delete' goal.goal_name %}">Delete</a>
+                          <a href="{% url 'delete' goal.goal_id %}">Delete</a>
 
-                          <form action="{% url 'invest' goal.goal_name %}" method="post">
+                          <form action="{% url 'invest' goal.goal_id %}" method="post">
                               {% csrf_token %}
                               <input type="number" placeholder="Amount" name="investAmt" required />
                               <button type="submit">Invest</button>
