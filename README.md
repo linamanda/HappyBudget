@@ -24,3 +24,6 @@ In the Application section...
 
 In the Documentation section...
 - pdf files containing the documentation of the web application
+
+### Website
+The website can be found [here](http://ec2-13-59-126-243.us-east-2.compute.amazonaws.com:8000/hb_app/login)!
